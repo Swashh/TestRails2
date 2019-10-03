@@ -1,0 +1,74 @@
+<p>
+  <strong>Title:</strong>
+  <%= @category.title %>
+  <%= link_to 'Edit name category', edit_category_path(@category) %>
+
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @category.text %>
+</p>
+
+<h2>Comments</h2>
+<% @category.comments.each do |comment| %>
+    <p>
+      <strong>Commenter:</strong>
+      <%= comment.commenter %>
+    </p>
+
+    <p>
+      <strong>Comment:</strong>
+      <%= comment.body %>
+    </p>
+<% end %>
+
+<h2>Add a comment:</h2>
+<%= form_with(model: [ @category, @category.comments.build ], local: true) do |form| %>
+    <p>
+      <%= form.label :commenter %><br>
+      <%= form.text_field :commenter %>
+    </p>
+    <p>
+      <%= form.label :body %><br>
+      <%= form.text_area :body %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+<% end %>
+
+
+
+
+<h2>Новый пост</h2>
+<% @category.posts.each do |post| %>
+    <p>
+      <strong>Название поста:</strong>
+      <%= post.title %>
+    </p>
+
+    <p>
+      <strong>Описание поста:</strong>
+      <%= post.text %>
+    </p>
+<% end %>
+
+<h2>Добавление нового поста:</h2>
+<%= form_with(model: [ @category, @category.posts.build ], local: true) do |form| %>
+    <p>
+      <%= form.label :Название_поста %><br>
+      <%= form.text_field :title %>
+    </p>
+    <p>
+      <%= form.label :Описание_поста %><br>
+      <%= form.text_area :text%>
+    </p>
+    <p>
+      <%= form.submit  %>
+    </p>
+<% end %>
+
+<%= link_to 'Back', categories_path %>
+<!--byebug-->
+<%= link_to 'Edit Post', edit_category_post_path(@category) %>
